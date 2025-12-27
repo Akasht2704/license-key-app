@@ -1,0 +1,25 @@
+const { contextBridge } = require("electron");
+const fs = require("fs");
+const path = require("path");
+
+const TOKEN_PATH = path.join(process.cwd(), "token.txt");
+
+contextBridge.exposeInMainWorld("electronAPI", {
+
+  saveToken: (token) => {
+    console.log('token-Path--->',TOKEN_PATH);
+    
+    fs.writeFileSync(TOKEN_PATH, token, "utf-8");
+  },
+  getToken: () => {
+    if (fs.existsSync(TOKEN_PATH)) {
+      console.log('token-Path--->',TOKEN_PATH);
+      return fs.readFileSync(TOKEN_PATH, "utf-8");
+    }
+    return null;
+  },
+  removeToken: () => {
+    console.log('token-Path--->',TOKEN_PATH);
+    if (fs.existsSync(TOKEN_PATH)) fs.unlinkSync(TOKEN_PATH);
+  },
+});
