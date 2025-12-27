@@ -1,16 +1,10 @@
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import { getToken } from "./utils/token";
-import { useEffect, useState } from "react";
+import { useAuth } from "./context/AuthContext";
 
 export default function App() {
-  const [auth, setAuth] = useState(null);
-
-  useEffect(() => {
-    const token = getToken();
-    setAuth(!!token);
-  }, []);
+  const { auth } = useAuth();
 
   if (auth === null) return null;
 
@@ -18,7 +12,10 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={auth ? <Navigate to="/dashboard" /> : <Login />} />
-        <Route path="/dashboard" element={auth ? <Dashboard /> : <Navigate to="/" />} />
+        <Route
+          path="/dashboard"
+          element={auth ? <Dashboard /> : <Navigate to="/" />}
+        />
       </Routes>
     </HashRouter>
   );

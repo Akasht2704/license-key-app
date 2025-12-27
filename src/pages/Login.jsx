@@ -1,47 +1,52 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginApi } from "../services/authService";
 import { saveToken } from "../utils/token";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const [licenseKey, setLicenseKey] = useState("");
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
   const handleLogin = async () => {
-    if (licenseKey.length !== 16) {
-      setError("License key must be 16 digits");
-      return;
-    }
-
     try {
+      setLoading(true);
+
       const res = await loginApi(licenseKey);
 
-      console.log("Login response:", res);
-      saveToken(res.token); // save JWT in txt file
-      navigate("/dashboard");
+      // assuming API response: { token: "JWT_TOKEN" }
+      if (res?.token) {
+        await saveToken(res.token);
+        setAuth(true);
+
+        // ✅ IMPORTANT: direct redirect
+        navigate("/dashboard", { replace: true });
+        console.log('after navigation');
+        
+      } else {
+        alert("Invalid license key");
+      }
     } catch (err) {
-      setError("Invalid license key");
+      console.error(err);
+      alert("Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ padding: 40 }}>
-      <h2>License Login</h2>
-
+    <div>
+      <h2>Login</h2>
       <input
-        type="text"
         value={licenseKey}
-        maxLength={16}
         onChange={(e) => setLicenseKey(e.target.value)}
         placeholder="Enter 16 digit license key"
       />
-
-      <br /><br />
-
-      <button onClick={handleLogin}>Login</button>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <button onClick={handleLogin} disabled={loading}>
+        {loading ? "Checking..." : "Login"}
+      </button>
     </div>
   );
 }
