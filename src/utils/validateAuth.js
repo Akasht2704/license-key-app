@@ -11,7 +11,7 @@ export async function validateAuth() {
   if (!token) return false;
 
   try {
-    const res = await fetch("http://localhost:3000/api/auth/verify", {
+    const res = await fetch("https://license-key-api-nine.vercel.app/api/auth/verify", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

@@ -6,8 +6,13 @@
     "headers": [
       {
         "key": "key2",
-        "value": "",
-        "default": false
+        "value": "value 2",
+        "default": true
+      },
+      {
+        "key": "key3",
+        "value": "value 3",
+        "default": true
       }
     ],
     "body": []

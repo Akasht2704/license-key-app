@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1766990857368,
+    "name": "Test-PRN ",
+    "type": "prn",
+    "content": "TEXT 300,100,\"ROMAN.TTF\",0,1,7,\"Hello from PRN Preview\"\nTEXT 300,150,\"ROMAN.TTF\",0,1,7,\"Generic Name:- Paracetamol\"\nQRCODE 300,200,M,3,A,0,M2,S7,\"https://12345.com\"\nQRCODE 500,200,M,3,A,0,M2,S7,\"https://12345.com\""
+  },
+  {
+    "id": 1766991538684,
+    "name": "Test-JSON",
+    "type": "json",
+    "content": "{\n   \"KEY\":\"VALUE\"\n}"
+  }
+]

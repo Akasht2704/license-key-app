@@ -4,11 +4,12 @@ const path = require("path");
 
 const TOKEN_PATH = path.join(process.cwd(), "token.txt");
 const settingsPath = path.join(process.cwd(), "api-settings.json");
+const templatesPath = path.join(process.cwd(), "templates.json");
 
 contextBridge.exposeInMainWorld("electronAPI", {
 
   saveToken: (token) => {
-    console.log('token-Path--->',TOKEN_PATH);
+    
     
     fs.writeFileSync(TOKEN_PATH, token, "utf-8");
   },
@@ -37,6 +38,19 @@ contextBridge.exposeInMainWorld("electronAPI", {
     if (!fs.existsSync(settingsPath)) return null;
     const json = JSON.parse(fs.readFileSync(settingsPath));
     return json[type] || null;
+  },
+
+  getTemplates: () => {
+    if (!fs.existsSync(templatesPath)) return [];
+    return JSON.parse(fs.readFileSync(templatesPath, "utf-8"));
+  },
+
+  saveTemplates: (templates) => {
+    fs.writeFileSync(
+      templatesPath,
+      JSON.stringify(templates, null, 2),
+      "utf-8"
+    );
   },
 });
 
