@@ -1,0 +1,38 @@
+{
+  "access": {
+    "enabled": true,
+    "endpoint": "api/test/access/tasting",
+    "method": "GET",
+    "headers": [
+      {
+        "key": "key2",
+        "value": "",
+        "default": false
+      }
+    ],
+    "body": []
+  },
+  "data": {
+    "endpoint": "api/test",
+    "method": "POST",
+    "headers": [
+      {
+        "key": "key3",
+        "value": "valu3",
+        "default": false
+      },
+      {
+        "key": "key4",
+        "value": "value4",
+        "default": false
+      }
+    ],
+    "body": [
+      {
+        "key": "key3",
+        "value": "value 3",
+        "default": false
+      }
+    ]
+  }
+}
