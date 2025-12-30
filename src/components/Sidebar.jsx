@@ -86,6 +86,18 @@ export default function Sidebar({ onSelect }) {
       >
         🧾 Save Templates
       </div>
+
+      <div 
+        style={{
+          padding: 12,
+          cursor: "pointer",
+          borderTop: "1px solid #333",
+          marginTop: 10,
+        }}
+        onClick={() => onSelect("prn")}
+      >
+        PRN Print
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-const { contextBridge } = require("electron");
+const { contextBridge, ipcRenderer  } = require("electron");
 const fs = require("fs");
 const path = require("path");
 
@@ -52,6 +52,10 @@ contextBridge.exposeInMainWorld("electronAPI", {
       "utf-8"
     );
   },
+
+  printPRN: (content, copies) => {
+    ipcRenderer.send("print-prn", { content, copies });
+  }
 });
 
 

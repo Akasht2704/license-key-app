@@ -1,0 +1,7 @@
+TEXT 300,80,"ROMAN.TTF",0,1,8,"PRODUCT QR"
+
+TEXT 300,150,"ROMAN.TTF",0,1,7,"Product : Test-Product1"
+TEXT 300,200,"ROMAN.TTF",0,1,7,"Serial No : 1234"
+
+QRCODE 300,260,M,3,A,0,M2,S7,"abcd.com"
+QRCODE 520,260,M,3,A,0,M2,S7,"abcd.com"

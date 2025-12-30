@@ -20,6 +20,7 @@ import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import ApiSettings from "../components/ApiSettings";
 import Templates from "../components/Templates";
+import PrnPrint from "../components/PrnPrint";
 
 export default function Dashboard() {
   const [selected, setSelected] = useState(null);
@@ -34,6 +35,9 @@ export default function Dashboard() {
 
       case "templates":
         return <Templates />;
+
+      case "prn":
+        return <PrnPrint />;
 
       default:
         return (
